@@ -17,12 +17,15 @@ npm install --save @sushidesu/use-filter-select
 ## Example
 
 ```tsx
-import { useFilterSelect3Layers, jsonToFilterNode3Layers } from "@sushidesu/use-filter-select";
-import data from "./data.json";
+import {
+  useFilterSelect3Layers,
+  jsonToFilterNode3Layers,
+} from "@sushidesu/use-filter-select"
+import data from "./data.json"
 
 export const App = () => {
   // parse JSON
-  const root = jsonToFilterNode3Layers(data);
+  const root = jsonToFilterNode3Layers(data)
   // use hook
   const [selects, values, setter] = useFilterSelect3Layers(
     root,
@@ -37,9 +40,9 @@ export const App = () => {
       value: "",
       label: "Please select !!",
     }
-  );
+  )
 
-  console.log(values);
+  console.log(values)
 
   return (
     <div>
@@ -56,12 +59,12 @@ export const App = () => {
       </div>
       <button
         onClick={() => {
-          setter.setterLayer02("asahikawa");
+          setter.setterLayer02("asahikawa")
         }}
       >
         set City to asahikawa
       </button>
     </div>
-  );
-};
+  )
+}
 ```
