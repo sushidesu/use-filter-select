@@ -24,7 +24,7 @@ type SelectProps = {
 export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem = {
   label: "選択してください",
   value: ""
-}): [SelectProps[], {
+}): [[SelectProps, SelectProps, SelectProps], {
   layer01: OptionItem | undefined,
   layer02: OptionItem | undefined,
   layer03: OptionItem | undefined
