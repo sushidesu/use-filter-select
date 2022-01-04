@@ -5,7 +5,7 @@ type Values = {
 }
 
 const _convert = (values: Values): FilterNode[] => {
-  return Object.entries(values).map(([key, value]) => {
+  return Object.entries(values).filter(([key]) => key !== "").map(([key, value]) => {
     return {
       value: key,
       label: key,
