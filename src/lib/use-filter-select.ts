@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 
 export type FilterNodeRoot = {
   children: FilterNode[]
@@ -21,6 +21,8 @@ type SelectProps = {
   options: OptionItem[]
 }
 
+type SelectSetter = (value: string | undefined) => void
+
 export const useFilterSelect = (tree: FilterNodeRoot, defaultValue?: {
   layer01: string | undefined,
   layer02: string | undefined,
@@ -33,6 +35,10 @@ defaultOption: OptionItem = {
   layer01: OptionItem | undefined,
   layer02: OptionItem | undefined,
   layer03: OptionItem | undefined
+}, {
+  setterLayer01: SelectSetter,
+  setterLayer02: SelectSetter,
+  setterLayer03: SelectSetter,
 }] => {
   const layer01_default = tree.children[0]
 
@@ -55,36 +61,40 @@ defaultOption: OptionItem = {
     throw new Error(`layer03 > ${defaultValue.layer03} is not found`)
   }
 
+  const handleChangeLayer03 = useCallback((value: string | undefined) => {
+    setLayer03(value)
+  }, [])
+  const handleChangeLayer02 = useCallback((value: string | undefined) => {
+    setLayer03(undefined)
+    setLayer02(value)
+  }, [])
+  const handleChangeLayer01 = useCallback((value: string | undefined) => {
+    setLayer03(undefined)
+    setLayer02(undefined)
+    setLayer01(value)
+  }, [])
+
   return [
   [
     {
       options: convertOptions(tree, defaultOption),
       value: layer01,
       onChange: (e) => {
-        setLayer01(() => {
-          const next = e.target.value
-          setLayer02(undefined)
-          setLayer03(undefined)
-          return next
-        })
+        handleChangeLayer01(e.target.value)
       }
     },
     {
       options: convertOptions(l1, defaultOption),
       value: layer02,
       onChange: (e) => {
-        setLayer02(() => {
-          const next = e.target.value
-          setLayer03(undefined)
-          return next
-        })
+        handleChangeLayer02(e.target.value)
       }
     },
     {
       options: convertOptions(l2, defaultOption),
       value: layer03,
       onChange: (e) => {
-        setLayer03(e.target.value)
+        handleChangeLayer03(e.target.value)
       }
     }
   ],
@@ -92,7 +102,13 @@ defaultOption: OptionItem = {
     layer01: l1,
     layer02: l2,
     layer03: l3
-  }]
+  },
+  {
+    setterLayer01: handleChangeLayer01,
+    setterLayer02: handleChangeLayer02,
+    setterLayer03: handleChangeLayer03,
+  }
+  ]
 }
 
 const convertOptions = (parent: FilterNodeRoot | FilterNode | undefined, defaultOption: OptionItem): OptionItem[] => {
