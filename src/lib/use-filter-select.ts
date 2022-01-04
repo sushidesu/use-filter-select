@@ -54,7 +54,6 @@ defaultOption: OptionItem = {
     throw new Error(`layer01 > ${defaultValue.layer01} is not found`)
   }
   if (defaultValue?.layer02 !== undefined && (!l1 || l1.children.findIndex(node => node.value === defaultValue.layer02) === -1)) {
-    console.log(l2)
     throw new Error(`layer02 > ${defaultValue.layer02} is not found`)
   }
   if (defaultValue?.layer03 !== undefined && (!l2 || l2.children.findIndex(node => node.value === defaultValue.layer03) === -1)) {
