@@ -21,7 +21,12 @@ type SelectProps = {
   options: OptionItem[]
 }
 
-export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem = {
+export const useFilterSelect = (tree: FilterNodeRoot, defaultValue?: {
+  layer01: string | undefined,
+  layer02: string | undefined,
+  layer03: string | undefined,
+},
+defaultOption: OptionItem = {
   label: "Please select",
   value: ""
 }): [[SelectProps, SelectProps, SelectProps], {
@@ -31,13 +36,24 @@ export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem 
 }] => {
   const layer01_default = tree.children[0]
 
-  const [layer01, setLayer01] = useState<string | undefined>(layer01_default?.value)
-  const [layer02, setLayer02] = useState<string | undefined>(undefined)
-  const [layer03, setLayer03] = useState<string | undefined>(undefined)
+  const [layer01, setLayer01] = useState<string | undefined>(defaultValue?.layer01 ?? layer01_default?.value)
+  const [layer02, setLayer02] = useState<string | undefined>(defaultValue?.layer02)
+  const [layer03, setLayer03] = useState<string | undefined>(defaultValue?.layer03)
 
   const l1 = tree.children.find((node) => node.value === layer01)
   const l2 = l1?.children.find((node) => node.value === layer02)
   const l3 = l2?.children.find((node) => node.value === layer03)
+
+  if (defaultValue?.layer01 !== undefined && tree.children.findIndex(node => node.value === defaultValue.layer01) === -1) {
+    throw new Error(`layer01 > ${defaultValue.layer01} is not found`)
+  }
+  if (defaultValue?.layer02 !== undefined && (!l1 || l1.children.findIndex(node => node.value === defaultValue.layer02) === -1)) {
+    console.log(l2)
+    throw new Error(`layer02 > ${defaultValue.layer02} is not found`)
+  }
+  if (defaultValue?.layer03 !== undefined && (!l2 || l2.children.findIndex(node => node.value === defaultValue.layer03) === -1)) {
+    throw new Error(`layer03 > ${defaultValue.layer03} is not found`)
+  }
 
   return [
   [

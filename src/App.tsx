@@ -5,6 +5,10 @@ import data from "./15niigat.json"
 export const App = () => {
   const root = jsonToFilterNode(data)
   const [selects, values] = useFilterSelect(root, {
+    layer01: undefined,
+    layer02: "新潟市北区",
+    layer03: undefined,
+  }, {
     value: "",
     label: "選択してね"
   })
