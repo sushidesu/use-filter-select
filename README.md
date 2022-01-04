@@ -27,7 +27,7 @@ export const App = () => {
   // parse JSON
   const root = jsonToFilterNode3Layers(data)
   // use hook
-  const [selects, values, setter] = useFilterSelect3Layers(
+  const [selects, values, setters] = useFilterSelect3Layers(
     root,
     // set default values (optional)
     {
@@ -59,7 +59,7 @@ export const App = () => {
       </div>
       <button
         onClick={() => {
-          setter.setterLayer02("asahikawa")
+          setters.setterLayer02("asahikawa")
         }}
       >
         set City to asahikawa
