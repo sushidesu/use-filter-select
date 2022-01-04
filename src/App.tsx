@@ -1,10 +1,10 @@
-import { useFilterSelect } from "./lib/use-filter-select"
-import { jsonToFilterNode } from "./lib/json-to-filter-node"
+import { useFilterSelect3Layers } from "./lib/use-filter-select-3-layers"
+import { jsonToFilterNode3Layers } from "./lib/json-to-filter-node-3-layers"
 import data from "./15niigat.json"
 
 export const App = () => {
-  const root = jsonToFilterNode(data)
-  const [selects, values, setter] = useFilterSelect(root, {
+  const root = jsonToFilterNode3Layers(data)
+  const [selects, values, setter] = useFilterSelect3Layers(root, {
     layer01: undefined,
     layer02: "新潟市北区",
     layer03: undefined,

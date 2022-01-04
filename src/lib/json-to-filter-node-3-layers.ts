@@ -1,4 +1,4 @@
-import { FilterNodeRoot, FilterNode } from "./use-filter-select"
+import { FilterNodeRoot, FilterNode } from "./use-filter-select-3-layers"
 
 type Values = {
   [key: string]: Values
@@ -14,7 +14,7 @@ const _convert = (values: Values): FilterNode[] => {
   })
 }
 
-export const jsonToFilterNode = (json: unknown): FilterNodeRoot => {
+export const jsonToFilterNode3Layers = (json: unknown): FilterNodeRoot => {
   const values = json as Values
   return {
     children: _convert(values)

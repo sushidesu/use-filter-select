@@ -23,7 +23,7 @@ type SelectProps = {
 
 type SelectSetter = (value: string | undefined) => void
 
-export const useFilterSelect = (tree: FilterNodeRoot, defaultValue?: {
+export const useFilterSelect3Layers = (tree: FilterNodeRoot, defaultValue?: {
   layer01: string | undefined,
   layer02: string | undefined,
   layer03: string | undefined,
