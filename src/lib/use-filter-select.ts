@@ -57,9 +57,11 @@ export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem 
       options: [defaultOption].concat(l1?.children.map((node) => _convert(node)) ?? []),
       value: layer02,
       onChange: (e) => {
-        const next = e.target.value
-        setLayer02(next)
-        setLayer03(undefined)
+        setLayer02(() => {
+          const next = e.target.value
+          setLayer03(undefined)
+          return next
+        })
       }
     },
     {
