@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 
-type FilterNodeRoot = {
+export type FilterNodeRoot = {
   children: FilterNode[]
 }
 
-type FilterNode = {
+export type FilterNode = {
   label: string
   value: string
   children: FilterNode[]
