@@ -1,5 +1,6 @@
 {
   "name": "@sushidesu/use-filter-select",
+  "description": "custom hook for filtering <options>",
   "version": "0.0.0",
   "license": "MIT",
   "main": "dist/index.js",
