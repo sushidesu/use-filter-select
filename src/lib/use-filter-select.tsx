@@ -44,14 +44,27 @@ export const useFilterSelect = (tree: FilterNodeRoot): [SelectProps[], {
       options: tree.children.map(node => _convert(node)),
       value: layer01,
       onChange: (e) => {
-        setLayer01(e.target.value)
+        setLayer01(() => {
+          const next = e.target.value
+          const nextl1 = tree.children.find((node) => node.value === next)
+          const nextl1_default = nextl1?.children[0]
+          const nextl2 = nextl1?.children.find((node) => node.value === nextl1_default?.value)
+          const nextl2_default = nextl2?.children[0]
+          setLayer02(nextl1_default?.value)
+          setLayer03(nextl2_default?.value)
+          return next
+        })
       }
     },
     {
       options: l1?.children.map((node) => _convert(node)) ?? [],
       value: layer02,
       onChange: (e) => {
-        setLayer02(e.target.value)
+        const next = e.target.value
+        setLayer02(next)
+        const nextl2 = l1?.children.find((node) => node.value === next)
+        const nextl2_default = nextl2?.children[0]
+        setLayer03(nextl2_default?.value)
       }
     },
     {
