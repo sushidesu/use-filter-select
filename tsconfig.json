@@ -3,7 +3,6 @@
     "outDir": "dist",
     "target": "ESNext",
     "declaration": true,
-    "sourceMap": true,
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
