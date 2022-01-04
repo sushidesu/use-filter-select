@@ -42,7 +42,7 @@ export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem 
   return [
   [
     {
-      options: tree.children.map(node => _convert(node)),
+      options: convertOptions(tree, defaultOption),
       value: layer01,
       onChange: (e) => {
         setLayer01(() => {
@@ -54,7 +54,7 @@ export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem 
       }
     },
     {
-      options: [defaultOption].concat(l1?.children.map((node) => _convert(node)) ?? []),
+      options: convertOptions(l1, defaultOption),
       value: layer02,
       onChange: (e) => {
         setLayer02(() => {
@@ -65,7 +65,7 @@ export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem 
       }
     },
     {
-      options: [defaultOption].concat(l2?.children.map((node) => _convert(node)) ?? []),
+      options: convertOptions(l2, defaultOption),
       value: layer03,
       onChange: (e) => {
         setLayer03(e.target.value)
@@ -77,6 +77,17 @@ export const useFilterSelect = (tree: FilterNodeRoot, defaultOption: OptionItem 
     layer02: l2,
     layer03: l3
   }]
+}
+
+const convertOptions = (parent: FilterNodeRoot | FilterNode | undefined, defaultOption: OptionItem): OptionItem[] => {
+  if (!parent) {
+    return []
+  }
+  else if (parent.children.length <= 1) {
+    return parent.children.map((node) => _convert(node))
+  } else {
+    return [defaultOption].concat(parent.children.map((node) => _convert(node)))
+  }
 }
 
 const _convert = (node: FilterNode): OptionItem => {
