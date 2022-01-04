@@ -17,8 +17,7 @@ npm install --save @sushidesu/use-filter-select
 ## Example
 
 ```tsx
-import { useFilterSelect3Layers } from "@sushidesu/use-filter-select/use-filter-select-3-layers";
-import { jsonToFilterNode3Layers } from "@sushidesu/use-filter-select/json-to-filter-node-3-layers";
+import { useFilterSelect3Layers, jsonToFilterNode3Layers } from "@sushidesu/use-filter-select";
 import data from "./data.json";
 
 export const App = () => {
