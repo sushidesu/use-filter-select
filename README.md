@@ -1,4 +1,4 @@
-#  @sushidesu/use-filter-select
+# @sushidesu/use-filter-select
 
 ## Installation
 
@@ -17,13 +17,13 @@ npm install --save @sushidesu/use-filter-select
 ## Example
 
 ```tsx
-import { useFilterSelect3Layers } from "@sushidesu/use-filter-select/use-filter-select-3-layers"
-import { jsonToFilterNode3Layers } from "@sushidesu/use-filter-select/json-to-filter-node-3-layers"
-import data from "./data.json"
+import { useFilterSelect3Layers } from "@sushidesu/use-filter-select/use-filter-select-3-layers";
+import { jsonToFilterNode3Layers } from "@sushidesu/use-filter-select/json-to-filter-node-3-layers";
+import data from "./data.json";
 
 export const App = () => {
   // parse JSON
-  const root = jsonToFilterNode3Layers(data)
+  const root = jsonToFilterNode3Layers(data);
   // use hook
   const [selects, values, setter] = useFilterSelect3Layers(
     root,
@@ -36,29 +36,33 @@ export const App = () => {
     // set first option (optional)
     {
       value: "",
-      label: "選択してね"
+      label: "Please select !!",
     }
-  )
+  );
 
-  console.log(values)
+  console.log(values);
 
   return (
     <div>
       <div>
         {selects.map(({ options, ...props }, i) => (
-          <select key={i} {...props}>{
-            options.map(opt => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))
-          }</select>
+          <select key={i} {...props}>
+            {options.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
         ))}
       </div>
-      <button onClick={() => {
-        setter.setterLayer02("asahikawa")
-      }}>set City to asahikawa</button>
+      <button
+        onClick={() => {
+          setter.setterLayer02("asahikawa");
+        }}
+      >
+        set City to asahikawa
+      </button>
     </div>
-  )
-}
-
-
+  );
+};
 ```
